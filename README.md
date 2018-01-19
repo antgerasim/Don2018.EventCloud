@@ -10,6 +10,7 @@ User Interface is based on [BSB Admin theme](https://github.com/gurayyarar/Admin
 # DON COMMENT -> NuGet Restore Bug
 Add this file to the same folder as your .sln file: NuGet.Config
 https://github.com/aspnetboilerplate/aspnetboilerplate/blob/dev/NuGet.Config
+Source: https://github.com/aspnetboilerplate/aspnetboilerplate/issues/2831
 
 # Download
 
