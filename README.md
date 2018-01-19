@@ -7,6 +7,10 @@ This is a template to create **ASP.NET Core MVC / Angular** based startup projec
  
 User Interface is based on [BSB Admin theme](https://github.com/gurayyarar/AdminBSBMaterialDesign).
  
+# DON COMMENT -> NuGet Restore Bug
+Add this file to the same folder as your .sln file: NuGet.Config
+https://github.com/aspnetboilerplate/aspnetboilerplate/blob/dev/NuGet.Config
+
 # Download
 
 Create & download your project from https://aspnetboilerplate.com/Templates
