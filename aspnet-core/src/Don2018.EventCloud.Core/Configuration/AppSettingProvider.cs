@@ -9,7 +9,13 @@ namespace Don2018.EventCloud.Configuration
         {
             return new[]
             {
-                new SettingDefinition(AppSettingNames.UiTheme, "red", scopes: SettingScopes.Application | SettingScopes.Tenant | SettingScopes.User, isVisibleToClients: true)
+                new SettingDefinition(AppSettingNames.UiTheme,
+                    defaultValue: "red",
+                    scopes: SettingScopes.Application | SettingScopes.Tenant | SettingScopes.User,
+                    isVisibleToClients: true),
+                new SettingDefinition(AppSettingNames.MaxAllowedEventRegistrationCountInLast30DaysPerUser,
+                    defaultValue: "10",
+                    scopes: SettingScopes.Tenant)
             };
         }
     }
