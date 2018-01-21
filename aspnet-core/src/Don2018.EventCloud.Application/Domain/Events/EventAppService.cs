@@ -8,7 +8,10 @@ using Abp.AutoMapper;
 using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
+using Abp.Runtime.Session;
 using Abp.UI;
+using Don2018.EventCloud.Authorization.Users;
+using Don2018.EventCloud.Domain.Events.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace Don2018.EventCloud.Domain.Events
@@ -34,12 +37,15 @@ namespace Don2018.EventCloud.Domain.Events
                 .OrderByDescending(e => e.CreationTime)
                 .ToListAsync();
 
-            return new ListResultDto<EventListDto>(events.MapTo<List<EventListDto>>());
+            var retVal = new ListResultDto<EventListDto>(events.MapTo<List<EventListDto>>());
+            
+            return retVal;
         }
 
         public async Task<EventDetailOutput> GetDetail(EntityDto<Guid> input)
         {
-            var @event = await _eventRepo.GetAll()
+            var @event = await _eventRepo
+                .GetAll()
                 .Include(e => e.Registrations)
                 .Where(e => e.Id == input.Id)
                 .FirstOrDefaultAsync();
@@ -51,50 +57,44 @@ namespace Don2018.EventCloud.Domain.Events
 
             return ObjectMapper.Map<EventDetailOutput>(@event);
         }
+
+        public async Task Create(CreateEventInput input)
+        {
+            var @event = Event.Create(AbpSession.GetTenantId(), input.Title, input.Date, input.Description,
+                input.NaxRegistrationCount);
+
+            await _eventManager.CreateAsync(@event);
+        }
+
+        public async Task Cancel(EntityRequestInput<Guid> input)
+        {
+            var @event = await _eventManager.GetAsync(input.Id);
+            _eventManager.Cancel(@event);
+        }
+
+        public async Task<EventRegisterOutput> Register(EntityRequestInput<Guid> input)
+        {
+            var registration = await RegisterAndSaveAsync(
+                await _eventManager.GetAsync(input.Id),
+                await GetCurrentUserAsync()
+                );
+
+            return new EventRegisterOutput
+            {
+                RegistrationId = registration.Id
+            };
+
+        }
+
+        private async Task<EventRegistration> RegisterAndSaveAsync(Event @event, User user)
+        {
+            var registration = await _eventManager.RegisterAsync(@event, user);
+            await CurrentUnitOfWork.SaveChangesAsync();
+            return registration;
+        }
     }
 
-    internal interface IEventAppService
-    {
+    /*application service does not implement domain logic itself. It just uses entities and domain services (EventManager) to perform the use cases.*/
 
-    }
 
-    [AutoMapFrom(typeof(Event))]
-    public class EventDetailOutput : FullAuditedEntityDto<Guid>
-    {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public DateTime Date { get; set; }
-        public bool IsCancelled { get; set; }
-        public virtual int MaxRegistrationCount { get; protected set; }
-        public int RegistrationsCount { get; set; }
-        public ICollection<EventRegistrationDto>  Registrations { get; set; }
-    }
-
-    [AutoMapFrom(typeof(EventRegistration))]
-    public class EventRegistrationDto : CreationAuditedEntityDto
-    {
-        public virtual Guid  EventId { get; protected set; }
-        public virtual long UserId { get; protected set; }
-        public virtual string UserName { get; protected set; }
-        public virtual string UserSurname { get; protected set; }
-    }
-
-    public class GetEventsInpput
-    {
-        public bool IncludeCancelledEvents { get; set; }
-    }
-
-    [AutoMapFrom(typeof(Event))]
-    public class EventListDto : FullAuditedEntityDto<Guid>
-    {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public DateTime Date { get; set; }
-
-        public bool IsCancelled { get; set; }
-
-        public virtual int MaxRegistrationCount { get; protected set; }
-
-        public int RegistrationsCount { get; set; }
-    }
 }

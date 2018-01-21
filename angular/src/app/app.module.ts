@@ -1,4 +1,4 @@
-﻿import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
@@ -32,6 +32,8 @@ import { SideBarNavComponent } from '@app/layout/sidebar-nav.component';
 import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
 import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
 import { MaterialInput } from '@shared/directives/material-input.directive';
+import { EventsComponent } from '@app/events/events.component';
+
 
 @NgModule({
     declarations: [
@@ -52,7 +54,8 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
         SideBarUserAreaComponent,
         SideBarNavComponent,
         SideBarFooterComponent,
-        RightSideBarComponent
+        RightSideBarComponent,
+        EventsComponent
     
     ],
     imports: [

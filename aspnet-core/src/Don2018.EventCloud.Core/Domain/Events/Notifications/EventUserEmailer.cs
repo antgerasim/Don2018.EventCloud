@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Abp.Dependency;
 using Abp.Domain.Uow;
 using Abp.Events.Bus.Entities;
@@ -33,8 +36,19 @@ namespace Don2018.EventCloud.Domain.Events.Notifications
         {
             //Todo Send email to all tenant users as a notification
 
-            var users = _userManager.Users.Where(u => u.TenantId == eventData.Entity.TenantId).ToList();
+            var users = new List<User>();
 
+            try
+            {
+                 users = _userManager.Users.Where(u => u.TenantId == eventData.Entity.TenantId).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                //throw;
+            }
+
+      
             foreach (var user in users)
             {
                 var message = string.Format("Hey! There is a new event '{0}' on {1}! Want to register?",
