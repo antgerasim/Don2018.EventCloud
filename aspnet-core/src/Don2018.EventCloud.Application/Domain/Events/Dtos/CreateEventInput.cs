@@ -7,6 +7,6 @@ namespace Don2018.EventCloud.Domain.Events.Dtos
         public string Title { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
-        public int NaxRegistrationCount { get; set; }
+        public int MaxRegistrationCount { get; set; }
     }
 }

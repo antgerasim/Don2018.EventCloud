@@ -33,6 +33,7 @@ import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
 import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
 import { MaterialInput } from '@shared/directives/material-input.directive';
 import { EventsComponent } from '@app/events/events.component';
+import { CreateEventComponent } from '@app/events/create-event/create-event.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { EventsComponent } from '@app/events/events.component';
         SideBarNavComponent,
         SideBarFooterComponent,
         RightSideBarComponent,
-        EventsComponent
+        EventsComponent,
+        CreateEventComponent
     
     ],
     imports: [

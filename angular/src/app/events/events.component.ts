@@ -2,6 +2,7 @@ import { Component, Injector, ViewChild, OnInit } from '@angular/core';
 import { EventServiceProxy, EventListDto } from "shared/service-proxies/service-proxies";
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { AppComponentBase } from 'shared/app-component-base';
+import { CreateEventComponent } from 'app/events/create-event/create-event.component';
 
 @
 Component({
@@ -11,6 +12,7 @@ Component({
 export class EventsComponent extends AppComponentBase implements OnInit {
 
     //viewChild
+    @ViewChild('createEventModal') createEventModal: CreateEventComponent;
 
     events: EventListDto[] = [];
     // filters: Object = { includeCancelledEvents: true };
@@ -40,16 +42,16 @@ export class EventsComponent extends AppComponentBase implements OnInit {
         });
     }
 
-    protected openNewEventDialog() {
-        //todo open modal to save new event entry
-        console.log('openNewEventDialog clicked');
-    }
-
     protected watchIncludeCancelledEventsCheckBox(event) {
         //console.log(event); // logs model value
         console.log(this.filters.includeCancelledEvents);
         this.loadEvents();
 
+    }
+
+    // Show Modals
+    createEvent(): void {
+        this.createEventModal.show();
     }
 
 }

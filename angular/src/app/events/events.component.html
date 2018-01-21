@@ -4,7 +4,7 @@
             <div class="header">
                 <h2>
                     <span>{{l('Events')}}</span>
-                    <p (click)="openNewEventDialog()" class="btn btn-primary btn-sm" role="button">
+                    <p (click)="createEvent()" class="btn btn-primary btn-sm" role="button">
                         <i class="material-icons">add</i>
                     </p>
                     <!-- <a (click)="openNewEventDialog()" class="btn btn-primary btn-sm">
@@ -57,3 +57,5 @@
         </div>
     </div>
 </div>
+
+<create-event-modal #createEventModal (modalSave)="refresh()"></create-event-modal>

@@ -1,0 +1,82 @@
+<div bsModal #createEventModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="createEventModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog">
+        <div #modalContent class="modal-content">
+
+            <form #createEventForm="ngForm" id="frm_create_event" novalidate (ngSubmit)="save()">
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        <span>{{l("CreateNewEvent")}}</span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="eventtitle" type="text" name="EventTitle" [(ngModel)]="event.title" required maxlength="32" minlength="2" class="validate form-control">
+                                    <label for="eventtitle" class="form-label">{{l("EventTitle")}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="eventdescription" type="text" name="EventDescription" [(ngModel)]="event.description" required maxlength="32" minlength="2" class="validate form-control">
+                                    <label for="eventdescription" class="form-label">{{l("EventDescription")}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--DATE STUFF-->
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="don-form-line-date">
+                                    <label for="eventdate" class="form-label" style="font-weight: normal; color: #aaa">{{l("EventDate")}}</label>
+                                    <input [(ngModel)]="event.date" id="eventdate" type="date" name="EventDate" [min]="today"  required maxlength="32" minlength="2" class="validate form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--DATE STUFF END-->
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="maxRegistrationCount" type="number" name="EventDate" [(ngModel)]="event.maxRegistrationCount" required maxlength="32" minlength="2" class="validate form-control">
+                                    <label for="maxRegistrationCount" class="form-label">{{l("EventMaxRegistrationCount")}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--                    <div class="row clearfix">
+        <div class="col-sm-12">
+            <h4>Event Options</h4>
+            <div class="col-sm-6">
+                <input type="checkbox" name="permission" value="{{event.isCancelled}}" class="filled-in" id="isCancelled" checked=""/>
+                <label for="isCancelled">Is cancelled</label>
+            </div>
+            <div class="col-sm-6">
+                <input type="checkbox" name="permission" value="{{event.maxRegistrationCount}}" class="filled-in" id="maxRegistrationCount" checked=""/>
+                <label for="maxRegistrationCount">Maximum registration count</label>
+            </div>
+        </div>
+    </div>-->
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default waves-effect" (click)="close()">
+                        {{l("Cancel")}}
+                    </button>
+                    <button [disabled]="!createEventForm.form.valid || saving" type="submit" class="btn btn-primary">
+                        {{l("Save")}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

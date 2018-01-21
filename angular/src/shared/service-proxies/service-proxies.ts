@@ -2253,7 +2253,7 @@ export class CreateEventInput implements ICreateEventInput {
     title: string;
     date: moment.Moment;
     description: string;
-    naxRegistrationCount: number;
+    maxRegistrationCount: number;
 
     constructor(data?: ICreateEventInput) {
         if (data) {
@@ -2269,7 +2269,7 @@ export class CreateEventInput implements ICreateEventInput {
             this.title = data["title"];
             this.date = data["date"] ? moment(data["date"].toString()) : <any>undefined;
             this.description = data["description"];
-            this.naxRegistrationCount = data["naxRegistrationCount"];
+            this.maxRegistrationCount = data["maxRegistrationCount"];
         }
     }
 
@@ -2284,7 +2284,7 @@ export class CreateEventInput implements ICreateEventInput {
         data["title"] = this.title;
         data["date"] = this.date ? this.date.toISOString() : <any>undefined;
         data["description"] = this.description;
-        data["naxRegistrationCount"] = this.naxRegistrationCount;
+        data["maxRegistrationCount"] = this.maxRegistrationCount;
         return data; 
     }
 
@@ -2300,7 +2300,7 @@ export interface ICreateEventInput {
     title: string;
     date: moment.Moment;
     description: string;
-    naxRegistrationCount: number;
+    maxRegistrationCount: number;
 }
 
 export class EntityRequestInputOfGuid implements IEntityRequestInputOfGuid {

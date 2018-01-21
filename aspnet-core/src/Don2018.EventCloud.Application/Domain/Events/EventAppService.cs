@@ -61,7 +61,7 @@ namespace Don2018.EventCloud.Domain.Events
         public async Task Create(CreateEventInput input)
         {
             var @event = Event.Create(AbpSession.GetTenantId(), input.Title, input.Date, input.Description,
-                input.NaxRegistrationCount);
+                input.MaxRegistrationCount);
 
             await _eventManager.CreateAsync(@event);
         }
