@@ -38,7 +38,7 @@
                             <div class="form-group form-float">
                                 <div class="don-form-line-date">
                                     <label for="eventdate" class="form-label" style="font-weight: normal; color: #aaa">{{l("EventDate")}}</label>
-                                    <input [(ngModel)]="event.date" id="eventdate" type="date" name="EventDate" [min]="today"  required maxlength="32" minlength="2" class="validate form-control">
+                                    <input id="eventdate" type="date" name="EventDate" [min]="today" [(ngModel)]="event.date" required maxlength="32" minlength="2" class="validate form-control">
                                 </div>
                             </div>
                         </div>

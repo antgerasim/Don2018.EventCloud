@@ -50,8 +50,12 @@ export class EventsComponent extends AppComponentBase implements OnInit {
     }
 
     // Show Modals
-    createEvent(): void {
+   protected createEvent(): void {
         this.createEventModal.show();
     }
+/*
+    protected refresh(): void {
+        this.getDataPage(this.pageNumber);
+    }*/
 
 }

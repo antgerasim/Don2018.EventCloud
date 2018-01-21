@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Abp;
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.AutoMapper;
@@ -60,7 +61,23 @@ namespace Don2018.EventCloud.Domain.Events
 
         public async Task Create(CreateEventInput input)
         {
-            var @event = Event.Create(AbpSession.GetTenantId(), input.Title, input.Date, input.Description,
+            var tenantId = 0;
+            try
+            {
+                 tenantId = AbpSession.GetTenantId();
+            }
+            catch (AbpException e)
+            {
+                Console.WriteLine(e);
+                throw new UserFriendlyException("You cannot create an event logged as a host! Please log in as a tenant.");
+            }
+            
+            if (tenantId==0)
+            {
+                
+            }
+
+            var @event = Event.Create(tenantId, input.Title, input.Date.Date, input.Description,
                 input.MaxRegistrationCount);
 
             await _eventManager.CreateAsync(@event);
