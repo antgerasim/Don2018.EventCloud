@@ -7,6 +7,14 @@ This is a template to create **ASP.NET Core MVC / Angular** based startup projec
  
 User Interface is based on [BSB Admin theme](https://github.com/gurayyarar/AdminBSBMaterialDesign).
  
+# DON COMMENT 
+- NuGet Restore Bug:
+Add this file to the same folder as your .sln file: NuGet.Config
+https://github.com/aspnetboilerplate/aspnetboilerplate/blob/dev/NuGet.Config
+Source: https://github.com/aspnetboilerplate/aspnetboilerplate/issues/2831
+- Angular DI ERROR/ NOPROVIDERERROR:
+add "ApiServiceProxies.PersonServiceProxy" to providers array in service-proxy.module.ts file.
+https://forum.aspnetboilerplate.com/viewtopic.php?p=14267 
 # Download
 
 Create & download your project from https://aspnetboilerplate.com/Templates

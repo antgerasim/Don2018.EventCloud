@@ -15,9 +15,10 @@ using System;
 namespace Don2018.EventCloud.Migrations
 {
     [DbContext(typeof(EventCloudDbContext))]
-    partial class EventCloudDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180120213225_dbset added event and eventregistration")]
+    partial class dbsetaddedeventandeventregistration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

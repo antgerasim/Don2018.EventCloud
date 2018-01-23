@@ -1,0 +1,61 @@
+<div id="EventsIndex" class="row clearfix" [@routerTransition]>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card main-content">
+            <div class="header">
+                <h2>
+                    <span>{{l('Events')}}</span>
+                    <p (click)="createEvent()" class="btn btn-primary btn-sm" role="button">
+                        <i class="material-icons">add</i>
+                    </p>
+                    <!-- <a (click)="openNewEventDialog()" class="btn btn-primary btn-sm">
+                        <i class="material-icons">add</i>
+                    </a>-->
+                    <!--  <span class="pull-right m-r-100 ">-->
+                    <span class="pull-right m-r-40 ">
+                        <input [(ngModel)]="filters.includeCancelledEvents" (change)="watchIncludeCancelledEventsCheckBox($event)" type="checkbox" name="includeCanceledCheckBox" value="value_Name" class="filled-in" id="includeCanceledCheckBox" checked />
+                        <label for="includeCanceledCheckBox">{{l('ShowCanceledEvents')}}</label>
+                    </span>
+                </h2>
+
+                <ul class="header-dropdown m-r--5">
+                    <i class="fa fa-spin fa-spinner" *ngIf="isTableLoading"></i>
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:void(0);" class=" waves-effect <waves-block></waves-block>" (click)="refresh();"><i class="material-icons">refresh</i> Refresh</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>IsCancelled</th>
+                        <th>MaxRegistrationCount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let event of events ">
+                        <td>{{event.title}}</td>
+                        <td>{{event.description}}</td>
+                        <td>{{event.date}}</td>
+                        <td>{{event.isCancelled}}</td>
+                        <td>{{event.maxRegistrationCount}}</td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<create-event-modal #createEventModal (modalSave)="loadEvents()"></create-event-modal>
