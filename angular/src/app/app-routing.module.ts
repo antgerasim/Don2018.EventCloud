@@ -22,8 +22,9 @@ import { EventsComponent } from "app/events/events.component";
                     { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard] },
                     { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },
                     { path: 'about', component: AboutComponent },
-                    { path: 'events', component: EventsComponent }
-
+                    { path: 'events', component: EventsComponent },
+                    //{path: 'events',}
+                //https://stackoverflow.com/questions/45902521/routing-with-id-in-angular-4
                 ]
             }
         ])

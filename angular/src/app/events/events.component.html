@@ -10,9 +10,9 @@
                     <!-- <a (click)="openNewEventDialog()" class="btn btn-primary btn-sm">
                         <i class="material-icons">add</i>
                     </a>-->
-                    <!--  <span class="pull-right m-r-100 ">-->
+                    <!-- <span class="pull-right m-r-100 ">-->
                     <span class="pull-right m-r-40 ">
-                        <input [(ngModel)]="filters.includeCancelledEvents" (change)="watchIncludeCancelledEventsCheckBox($event)" type="checkbox" name="includeCanceledCheckBox" value="value_Name" class="filled-in" id="includeCanceledCheckBox" checked />
+                        <input [(ngModel)]="filters.includeCancelledEvents" (change)="watchIncludeCancelledEventsCheckBox($event)" type="checkbox" name="includeCanceledCheckBox" value="value_Name" class="filled-in" id="includeCanceledCheckBox" checked/>
                         <label for="includeCanceledCheckBox">{{l('ShowCanceledEvents')}}</label>
                     </span>
                 </h2>
@@ -31,7 +31,36 @@
                     </li>
                 </ul>
             </div>
-            <div class="body table-responsive">
+            <div class="row">
+                <div *ngFor="let event of events" class="event-registration-info col-md-6">
+                    <div class="event-body">
+                        <h3 class="event-title">{{event.title}}</h3>
+                        <p>{{event.description}}</p>
+                        <div *ngIf="event.isCancelled" class="event-canceled-info">l('ThisEventIsCanceled')</div>
+                        <div class="event-registration-info">
+                            <span *ngIf="event.registrationsCount < event.maxRegistrationCount">
+                                XofYregistered
+                                <!-- {{l("XofYregistered", "{{event.registrationsCount}}", "{{event.maxRegistrationCount}}")}}-->
+                            </span>
+                            <span *ngIf="event.maxRegistrationCount > 0 && event.registrationsCount >= event.maxRegistrationCount">
+                                <!-- {{l("XregisteredNoNewRegistrationAvailable", "{{event.registrationsCount}}")}}-->
+                                XregisteredNoNewRegistrationAvailable
+                            </span>
+                            <span *ngIf="event.maxRegistrationCount <= 0">
+                                XregisteredUnlimitedRegistrations
+                                <!-- @L("XregisteredUnlimitedRegistrations", "{{event.registrationsCount}}")-->
+                            </span>
+                        </div> weiter mit eventd etails page (angular route)
+                        <div class="event-actions">
+                            <a href="#/events/{{event.id}}" class="btn btn-sm btn-info" role="button">l('Details')</a>
+                        </div>
+                        <span class="event-date">
+                            <i class="material-icons">perm_contact_calendar</i><i>{{event.date | date}}</i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="body table-responsive">
                 <table class="table table-hover table-striped">
                     <thead>
                     <tr>
@@ -53,7 +82,7 @@
                     </tbody>
 
                 </table>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>
