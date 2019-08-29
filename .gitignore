@@ -6,3 +6,5 @@ obj/
 bin/
 aspnet-core/src/Don2018.EventCloud.Web.Host/App_Data/Logs/
 aspnet-core/src/Don2018.EventCloud.Web.Mvc/App_Data/Logs/
+aspnet-core/src/Don2018.EventCloud.Web.Host/appsettings.json
+aspnet-core/src/Don2018.EventCloud.Migrator/appsettings.json
